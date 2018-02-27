@@ -9,16 +9,16 @@
 In the introduction section, we analyzed the challenges that bottle detection may encounter in the UAV perspective.
 \begin{itemize}
 	%% 1. 尺度问题
-	\item The size of the bottles is very small and their scales change very much in UAV images. For solving this problem, we collect images at different flight altitudes of the UAV.
+	\item The size of the bottles is very small and their scales change very much in UAV images. For solving this problem, we collect images at different flight altitudes.
 	
 	%% 2. 背景复杂
-	\item In UAV images, the backgrounds of the bottles are very complex. In order to increase the diversity of dataset, we classify the possible scenes and divide them into eight scenes, each with a different number of images. Eight scenes are illustrated in Fig.\ref{fig:dataset-original-image} and Fig.\ref{fig:dataset-cut-image}. In Fig.\ref{fig:dataset-original-image}, we show eight full images of eight scenes whose sizes are $ 5472\times 3078 $. In Fig.\ref{fig:dataset-cut-image}, we show the segmented images of eight scenes, each scene contains three images whose size are $ 342 \times 342 $.
+	\item In UAV images, the backgrounds of the bottles are very complex. In order to increase the diversity of dataset, we classify the possible scenes and divide them into eight scenes. Eight scenes are illustrated in Fig.\ref{fig:dataset-original-image} and Fig.\ref{fig:dataset-cut-image}. In Fig.\ref{fig:dataset-original-image}, we show eight full images of eight scenes whose sizes are $ 5472\times 3078 $. In Fig.\ref{fig:dataset-cut-image}, we show the segmented images of eight scenes, each scene contains three images whose sizes are $ 342 \times 342 $.
 	
 	%% 3. 瓶子旋转
-	\item The bottles in UAV images often appear with arbitrary orientations. We find the orientation of bottles will affect the robustness of the trained model, so we annotated images by using the oriented bounding box.
+	\item The bottles in UAV images often appear with arbitrary orientations. We find the orientation of bottles will affect the robustness of the trained model, so we annotate images by using the oriented bounding box.
 	
 	%% 4. 瓶子透明
-	\item The plastic bottles as rubbish are usually transparent, so the background can be seen from the bottle, increasing the difficulty of detection. Our dataset includes a lot of transparent bottles, so we can use this large dataset to train a robust model.
+	\item The plastic bottles are usually transparent, so the background can be seen through the bottle, increasing the difficulty of detection. Our dataset includes a lot of examples of  transparent bottles, so we can use this large dataset to train a robust model.
 \end{itemize}
 %\begin{enumerate}[1. ]
 %	%% 1. 尺度问题
@@ -36,12 +36,12 @@ In the introduction section, we analyzed the challenges that bottle detection ma
 
 
 
-The UAV platform used in this work is a DJI Phantom 4 quadcopter integrated with a 3-axis stabilized gimbal.
+The UAV platform used in this work is DJI Phantom 4 quadcopter integrated with a 3-axis stabilized gimbal.
 
-Images are collected by a camera mounted on UAV. The resolution of the full images are $ 5472\times 3078 $. For dataset collection, we followed the following three key suggestions: (1) collecting images with bottles of a wide range of scale and aspect ratios; (2) collecting images with bottles of different background scenes; (3) collecting images with bottles of different orientations; (4) using as many types of bottles as possible. 
+Images are collected by a camera mounted on UAV. The resolution of the full images are $ 5472\times 3078 $. For dataset collection, we follow three key suggestions: (1) collecting images with bottles of a wide range of scale and aspect ratios; (2) collecting images with bottles of different background scenes; (3) collecting images with bottles of different orientations; (4) using as many types of bottles as possible. 
 
 
-To collect images covering bottles of a wide range of scales and aspect ratios, images at different flight altitudes of UAV, ranging from $ 10m $ to $ 30m $ are collected. Eight background scenes are chosen and annotated in our UAV-BD, including \textit{Bush forest land}, \textit{Waste land}, \textit{Step}, \textit{Forest land}, \textit{Flat ground}, \textit{Plastic stadium}, \textit{Sand land} and \textit{Grassland}. In this work, UAV images were collected from two periods. For each period, images are collected by using different bottles and different flight altitudes. Totally, images two periods are collected for establishing the dataset. The background scenes are selected according to whether a kind of scene is common and its value for real-world applications\cite{DOTA}.
+To collect images covering bottles of a wide range of scales and aspect ratios, images at different flight altitudes ranging from $ 10m $ to $ 30m $ are collected. Eight background scenes are chosen and annotated in our UAV-BD, including \textit{Bush forest land}, \textit{Waste land}, \textit{Step}, \textit{Forest land}, \textit{Flat ground}, \textit{Plastic stadium}, \textit{Sand land} and \textit{Grassland}. In this work, UAV images are collected from two periods. For each period, images are collected by using different bottles and different flight altitudes. The background scenes are selected according to whether a kind of scene is common and its value for real-world applications\cite{DOTA}.
 
 \begin{figure}
 	\includegraphics[width=\linewidth]{images/UAV-BD1.png}
@@ -66,9 +66,9 @@ To collect images covering bottles of a wide range of scales and aspect ratios, 
 
 
 
-We build the UAV-BD for the bottle detection problem by collecting bottle images using UAV. In the annotating stage, we consider different ways to annotate images. In computer vision field, many visual concepts such as region descriptions, objects, attributes, and relationships, are annotated with horizontal bounding boxes, as show in \cite{DOTA, boundingbox}. A common description of horizontal bounding boxes is $(c_x, c_y, w, h)$ or $ (x, y, w, h) $, where $(c_x, c_y)$ is the center location of horizontal bounding box, $w, h$ are the width and height of the horizontal bounding box, $ (x, y) $ is the top left location of the horizontal bounding box, respectively\cite{DOTA}. 
+We build the UAV-BD for the bottle detection problem by collecting bottle images using UAV. In the annotating stage, we consider different ways to annotate images. In computer vision field, many visual concepts such as region descriptions, objects, attributes, and relationships, are annotated with horizontal bounding boxes, as show in \cite{DOTA, boundingbox}. A common description of horizontal bounding boxes is $(c_x, c_y, w, h)$ or $ (x, y, w, h) $, where $(c_x, c_y)$ is the center location of horizontal bounding box, $w, h$ are the width and height and $ (x, y) $ is the top left location\cite{DOTA}. 
 
-Objects without many orientations can be adequately annotated with this method. However, bounding boxes annotated in this way cannot accurately or compactly outline oriented instances such as objects in UAV images. In UAV images, the overlap between two bounding boxes is sometimes very large that state-of-the-art object detection methods cannot diffetentiate them\cite{DOTA}. At the same time, horizontal bounding box may contain lots of backgrounds while annotating the target, it's especially the kind of objects with large aspect ratios. In order to remedy these, we need to find an annotation method suitable for oriented bottles in UAV images.
+Objects without many orientations can be adequately annotated with this method. However, horizontal bounding box cannot accurately or compactly outline oriented instances such as the objects in UAV images. In UAV images, the overlap between two bounding boxes is sometimes very large that some state-of-the-art object detection methods cannot diffetentiate them\cite{DOTA}. At the same time, horizontal bounding box may contain lots of backgrounds while annotating the target, it's especially the kind of objects with large aspect ratios. In order to remedy these, we need to find an annotation method suitable for oriented bottles in UAV images.
 
 An option for annotating oriented objects is arbitrary quadrilatral bounding boxes, this annotation method can be denoted as ${(x_i, y_i), i=1,2,3,4}$, where $(x_i, y_i)$ denotes the positions of the oriented bounding boxes' vertices in the image\cite{DOTA}. The vertices are arranged in a clockwise order. But due to bottles are rigid, almost no deformation, so we choose other way which is $\theta$-based oriented bounding box which is adopted in some text detection benchmarks, namely $(c_x, c_y, w, h, \theta)$, where $\theta$ denotes the angle from the horizontal direction of the horizontal bounding box\cite{DOTA}. The tool for annotating is roLabelImg\footnote{\url{https://github.com/cgvict/roLabelImg.git}}.
 
