@@ -41,12 +41,12 @@
 
 %% 1. 建立本数据集的动机和目的
 
-At present, there is a lot of rubbish in the tourist attractions, including all kinds of bottles, these bottles are mainly recycled by manpower. This method is time-consuming, laborious and dangerous. In order to solve these problems, we use the unmanned aerial vehicle (UAV) to locate and even recycle bottles. We also have built a UAV bottle dataset (UAV-BD) to locate bottles more effictively.
+Nowadays, with the popularity of tourist attractions, there is a lot of rubbish, especially bottles, need to recycle. However, these bottles are mainly collected by human observation, which is time-consuming, laborious and dangerous. In order to solve these problems, we use the unmanned aerial vehicle (UAV) to locate and even recycle bottles. We also build a UAV bottle dataset (UAV-BD) to locate bottles more effectively.
 
 
 %% 2. UAV 的发展, 拍摄图像的特性, 对目标检测的影响 -> 引出无人机视角下瓶子的特性
 
-Detecting objects in UAV images plays an important role in many ways and has received significant attention in recent years\cite{UAV2}. However, it is still a challenging problem due to the high resolution with the extremely high level of detail, various shooting platform, limited annotated data, and limited processing time for real-time applications\cite{car_detection}. In UAV images, the bottle looks completely different from the bottle in datasets such as PASCAL VOC\cite{PASCALVOC}, Microsoft COCO\cite{COCO}, etc. The difference between PASCAL VOC and our dataset is shown in Fig.\ref{bottle_VOC_UAV}.
+Detecting objects in UAV images plays an important role in many applications and has received significant attention in recent years\cite{UAV2}. However, it is still a challenging problem due to the high resolution with the extremely high level of detail, various shooting platform, limited annotated data, and limited processing time for real-time applications\cite{car_detection}. In UAV images, the bottle looks completely different from the bottle in datasets such as PASCAL VOC\cite{PASCALVOC}, Microsoft COCO\cite{COCO}, etc. The difference between PASCAL VOC and our dataset is shown in Fig.\ref{bottle_VOC_UAV}.
 
 \begin{figure}
 	\centering
@@ -61,17 +61,16 @@ Detecting objects in UAV images plays an important role in many ways and has rec
 		\includegraphics[height=0.37\linewidth]{images/bottle_UAV.png}
 	}
 	
-	\caption{Comparison of bottles in PASCAL VOC dataset and UAV images.}
+	\caption{Comparison of bottles in PASCAL VOC dataset and UAV images}
 	\label{bottle_VOC_UAV}
 \end{figure}
 
 %% 3. 无人机视角下瓶子的特性
 
-As to UAV images, detecting bottles exists several unique challenges. First, the size of bottles is very small, which is generally less than $ 50\times 50 $ pixels. At the same time, due to the different altitudes of the UAV, the size of bottles differs in scale. Second, in UAV images, the backgrounds of the bottles are very complex which results in poor performance of the general algorithm. Third, in contrast to conventional object detection datasets, where objects are generally oriented upward due to gravity\cite{DOTA}, the bottles in UAV images often appear with arbitrary orientations depending on the shooting angle of the UAV camera, as illustrated in Fig.\ref{bottle_UAV}. Fourth, the plastic bottles are transparent, so the background will can be seen through the bottle, increasing the difficulty of detection. In order to abtain the better performance of an algorithm for the bottle detection problem, we establish a UAV perspective bottle detection dataset and benchmark, which we call UAV-Bottle Dataset (UAV-BD).
+As to UAV images, detecting bottles exists several unique challenges. First, the size of bottles is very small, which is generally less than $ 50\times 50 $ pixels. At the same time, due to the different altitudes of the UAV system, the size of bottles differs in scale. Second, in UAV images, the backgrounds of the bottles are very complex which results in poor performance of the general algorithm. Third, in contrast to conventional object detection datasets, where objects are generally oriented upward due to gravity\cite{DOTA}, the bottles in UAV images often appear with arbitrary orientations depending on the shooting angle of the UAV camera, as illustrated in Fig.\ref{bottle_UAV}. Fourth, the plastic bottles are transparent, so the background will can be seen through the bottle, increasing the difficulty of detection. In order to abtain the better performance of an algorithm for the bottle detection problem, we establish a large scale bottle detection dataset and benchmark using UAV, which we call UAV-Bottle Dataset (UAV-BD).
 
 %% 4. 目标检测算法的发展
 %% 4.1 深度学习的算法
 %% 4.2 基于旋转框的目标检测算法
-Object detection is one of the most challenging tasks in computer vision and has attracted a lot of attention all the time\cite{DRBox}. As the development of deep learning, convolutional neural networks(CNN) has been applied for solving the object detection problem and the methods based on CNN have achieved state-of-the-art performance\cite{DRBox}. 
-
-Most of the existing detection methods use the horizonal bounding boxes to locate objects in images. The horizonal bounding box is a rotation variant data structure, but it works badly when the detector deals with orientation variations of target objects. To make the approach insensitive to objects in-plane rotation, some efforts are made either adjusting the orientation or trying to extract rotation insensitive features. Unlike these methods which try to eliminate the effect of rotation on the feature level, we prefer to make the rotation information useful for feature extraction so that the detection results involve the angle information. Therefore, the detection results are rotatable, whereas the performance of the detector is rotation invariant\cite{DRBox}.
+%Object detection is one of the most challenging tasks in computer vision and has attracted a lot of attention all the time\cite{DRBox}. 
+As the development of deep learning, convolutional neural networks(CNN) has been applied to solve the object detection problem and the methods based on CNN have achieved state-of-the-art performance\cite{DRBox}. Most of the existing detection methods use the horizonal bounding boxes to locate objects in images. The horizonal bounding box is a rotation variant data structure, but it works badly when the detector deals with orientation variations of target objects. To make the approach insensitive to objects in-plane rotation, some efforts are made either adjusting the orientation or trying to extract rotation insensitive features. Unlike these methods which try to eliminate the effect of rotation on the feature level, we prefer to make the rotation information useful for feature extraction so that the detection results involve the angle information. Therefore, the detection results are rotatable, whereas the performance of the detector is rotation invariant\cite{DRBox}.
