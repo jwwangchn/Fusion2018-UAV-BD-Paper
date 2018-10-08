@@ -1,4 +1,4 @@
-# 2018-Fusion-Paper
+# Fusion2018-UAV-BD-Paper
 This is the paper for the conference of Fusion 2018. If you used UAV-BD dataset or found this paper is useful for you, please cite our following paper:
 ```
 @inproceedings{wang2018,
